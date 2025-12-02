@@ -1,0 +1,25 @@
+/**
+ * CSS Variables for @wyxos/listing components
+ * Override these variables in your application to customize the appearance
+ */
+
+:root {
+    /* Active Filters Component Colors */
+    --vue-listing-filter-label-text: var(--vue-listing-filter-label-text, #c3e0fe);
+    --vue-listing-filter-label-bg: var(--vue-listing-filter-label-bg, #0353a4);
+    --vue-listing-filter-label-bg-hover: var(--vue-listing-filter-label-bg-hover, #0466c8);
+    --vue-listing-filter-value-text: var(--vue-listing-filter-value-text, #d0d7e5);
+    --vue-listing-filter-value-bg: var(--vue-listing-filter-value-bg, #000e29);
+    --vue-listing-filter-value-bg-hover: var(--vue-listing-filter-value-bg-hover, #001233);
+    --vue-listing-filter-border: var(--vue-listing-filter-border, #0466c8);
+    --vue-listing-filter-remove-text: var(--vue-listing-filter-remove-text, #7186b1);
+    --vue-listing-filter-remove-text-hover: var(--vue-listing-filter-remove-text-hover, #d0d7e5);
+    --vue-listing-filter-remove-bg-hover: var(--vue-listing-filter-remove-bg-hover, rgba(4, 102, 200, 0.4));
+    --vue-listing-filter-clear-bg: var(--vue-listing-filter-clear-bg, #dc2626);
+    --vue-listing-filter-clear-bg-hover: var(--vue-listing-filter-clear-bg-hover, #b91c1c);
+    --vue-listing-filter-clear-border: var(--vue-listing-filter-clear-border, #ef4444);
+    --vue-listing-filter-clear-text: var(--vue-listing-filter-clear-text, #ffffff);
+    --vue-listing-filter-disabled-opacity: var(--vue-listing-filter-disabled-opacity, 0.5);
+}
+
+
