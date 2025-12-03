@@ -20,10 +20,11 @@
         "styles"
     ],
     "scripts": {
-        "test": "vitest",
-        "test:run": "vitest run",
+        "test": "vitest run",
+        "test:watch": "vitest",
         "type-check": "tsc --noEmit",
-        "prepublishOnly": "npm run type-check && npm run test:run"
+        "prepublishOnly": "npm run type-check && npm run test:run",
+        "release": "npx @wyxos/zephyr --type=node"
     },
     "keywords": [
         "vue",
@@ -62,4 +63,3 @@
         "axios": "^1.11.0"
     }
 }
-

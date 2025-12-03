@@ -68,8 +68,11 @@ export class Listing<T extends Record<string, unknown>> {
         }
 
         // Try to use global window.axios if available
-        if (typeof window !== 'undefined' && (window as { axios?: AxiosInstance }).axios) {
-            return (window as { axios: AxiosInstance }).axios;
+        if (typeof window !== 'undefined') {
+            const windowAxios = (window as { axios?: AxiosInstance }).axios;
+            if (windowAxios) {
+                return windowAxios;
+            }
         }
 
         throw new Error(
