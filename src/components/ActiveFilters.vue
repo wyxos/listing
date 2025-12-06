@@ -17,32 +17,33 @@ const isAnyFilterRemoving = computed(() => props.listing.removingFilterKey !== n
 <template>
     <div v-if="listing.activeFilters.length > 0" class="vue-listing-active-filters">
         <span class="vue-listing-active-filters-label">Active filters:</span>
-        <span
-            v-for="filter in listing.activeFilters"
-            :key="filter.key"
-            class="vue-listing-filter-tag"
-        >
-            <span class="vue-listing-filter-tag-label">{{ filter.label }}</span>
-            <span class="vue-listing-filter-tag-value">{{ filter.value }}</span>
-            <button
-                type="button"
-                @click="() => listing.removeFilter(filter.key)"
-                :disabled="isRemovingFilter(filter.key) || isAnyFilterRemoving"
-                :aria-label="`Remove ${filter.label} filter`"
-                class="vue-listing-filter-remove"
-            >
-                <Loader2 v-if="isRemovingFilter(filter.key)" :size="12" class="vue-listing-spinner" />
-                <X v-else :size="12" />
+
+        <!-- Custom slot for filter pills -->
+        <slot name="filter" v-for="filter in listing.activeFilters" :key="filter.key" :filter="filter"
+            :is-removing="isRemovingFilter(filter.key)" :is-any-removing="isAnyFilterRemoving"
+            :remove="() => listing.removeFilter(filter.key)" />
+
+        <!-- Custom slot for clear button -->
+        <slot name="clear" :is-any-removing="isAnyFilterRemoving" :is-resetting="listing.isResetting"
+            :clear="() => listing.resetFilters()" />
+
+        <!-- Default rendering (when no custom slots provided) -->
+        <template v-if="!$slots.filter && !$slots.clear">
+            <span v-for="filter in listing.activeFilters" :key="filter.key" class="vue-listing-filter-tag">
+                <span class="vue-listing-filter-tag-label">{{ filter.label }}</span>
+                <span class="vue-listing-filter-tag-value">{{ filter.value }}</span>
+                <button type="button" @click="() => listing.removeFilter(filter.key)"
+                    :disabled="isRemovingFilter(filter.key) || isAnyFilterRemoving"
+                    :aria-label="`Remove ${filter.label} filter`" class="vue-listing-filter-remove">
+                    <Loader2 v-if="isRemovingFilter(filter.key)" :size="12" class="vue-listing-spinner" />
+                    <X v-else :size="12" />
+                </button>
+            </span>
+            <button type="button" @click="() => listing.resetFilters()"
+                :disabled="isAnyFilterRemoving || listing.isResetting" class="vue-listing-filter-clear">
+                Clear
             </button>
-        </span>
-        <button
-            type="button"
-            @click="() => listing.resetFilters()"
-            :disabled="isAnyFilterRemoving || listing.isResetting"
-            class="vue-listing-filter-clear"
-        >
-            Clear
-        </button>
+        </template>
     </div>
 </template>
 
@@ -130,6 +131,7 @@ const isAnyFilterRemoving = computed(() => props.listing.removingFilterKey !== n
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -158,5 +160,3 @@ const isAnyFilterRemoving = computed(() => props.listing.removingFilterKey !== n
     cursor: not-allowed;
 }
 </style>
-
-
