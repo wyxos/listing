@@ -1,6 +1,6 @@
 {
     "name": "@wyxos/listing",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "A Vue 3 composable for managing paginated, filterable data listings with URL synchronization",
     "type": "module",
     "main": "src/index.ts",
